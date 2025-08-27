@@ -43,8 +43,17 @@ jobs:
         cd CampusMarket-backend
         mvn test
         mvn clean package
+
+    - name: frontend
+      run: |
+        cd CampusMarket-frontend
+        npm i
+        npm run build
+
     # 4. 构建并推送后端镜像
     - name: Build and Push Backend Image
       run: |
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest ./CampusMarket-backend
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest ./CampusMarket-frontend
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
