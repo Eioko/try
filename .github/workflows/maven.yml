@@ -41,6 +41,7 @@ jobs:
     - name: Build with Maven
       run: |
         cd CampusMarket-backend
+        mvn test
         mvn clean package
     # 4. 构建并推送后端镜像
     - name: Build and Push Backend Image
